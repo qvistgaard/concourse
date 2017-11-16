@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+exec 3>&1 # make stdout available as fd 3 for the result
+exec 1>&2 # redirect all output to stderr for logging
+
+json=$(tee)
+host=$(echo $json | jq -r '.source.uri')
+
+env
+echo $1
+find $1
+find ./
+pwd
+
+echo "Request: ${host}/put (out)"
+echo "Current Tag:"
+cat $1/tag/current-tag
+
+tag=$(cat $1/tag/current-tag)
+put=$(echo $json | jq --arg tag "${tag}" --arg pipeline "${BUILD_PIPELINE_NAME}" '.source + { tag: $tag, pipeline: $pipeline}')
+echo $put | jq "."
+echo $put | curl -H 'Accept: application/json' -H "Content-Type: application/json" -X PUT -d @- ${host}/put >&3

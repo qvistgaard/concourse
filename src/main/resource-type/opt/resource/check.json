@@ -1,0 +1,8 @@
+{
+  "source": {
+    "uri": "http://172.18.0.1:9191/",
+    "branch": "develop",
+    "private_key": "..."
+  },
+  "version": { "ref": "1" }
+}

@@ -1,0 +1,7 @@
+{
+  "application": "test-application",
+  "step": "buid",
+  "uri": "http://172.18.0.1:9191/",
+  "tag": "Wed Nov 15 15:17:05 UTC 2017",
+  "pipeline": "main"
+}
